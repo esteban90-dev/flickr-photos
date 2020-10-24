@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
       #get photos for specific user
       begin
         @urls = get_public_photos(params[:id])
+        @user = get_user(params[:id])
       rescue
         flash[:notice] = "User not found"
         redirect_to root_path
@@ -24,7 +25,12 @@ class StaticPagesController < ApplicationController
   def get_public_photos(id)
     flickr = get_flickr
     photos = flickr.people.getPublicPhotos( :user_id => id )
-    photos.map{ |photo| Flickr.url_b(photo) }
+    photos.map{ |photo| Flickr.url_n(photo) }
+  end
+
+  def get_user(id)
+    flickr = get_flickr
+    flickr.people.getInfo( :user_id => id ) 
   end
 
   def get_random_photos_with_user(count)
