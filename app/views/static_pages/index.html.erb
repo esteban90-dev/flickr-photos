@@ -8,6 +8,9 @@
 <br><br>
 
 <% if @urls %>
+  <div>  
+    Displaying Photos from <%= link_to @user.username, @user.photosurl %>
+  </div>
   <% @urls.each do |url| %>
     <%= image_tag(url) %>
   <% end %>
@@ -15,8 +18,8 @@
 
 <% if @urls_and_users %>
   <% @urls_and_users.each do |url, user| %>
-    <a href="http:\\www.flickr.com/photos/<%= user %>">
+    <%= link_to root_path(id: user) do %>
       <%= image_tag(url) %>
-    </a>
+    <% end %>
   <% end %>
 <% end %>
