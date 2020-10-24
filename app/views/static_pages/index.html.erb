@@ -1,0 +1,22 @@
+<h1>Photos</h1>
+
+<%= form_with url: photos_path, method: "GET", local: true do |f| %>
+  <%= f.text_field :id, placeholder: "flickr user id" %>
+  <%= f.submit "Get Photos" %>
+<% end %>
+
+<br><br>
+
+<% if @urls %>
+  <% @urls.each do |url| %>
+    <%= image_tag(url) %>
+  <% end %>
+<% end %>
+
+<% if @urls_and_users %>
+  <% @urls_and_users.each do |url, user| %>
+    <a href="http:\\www.flickr.com/photos/<%= user %>">
+      <%= image_tag(url) %>
+    </a>
+  <% end %>
+<% end %>
