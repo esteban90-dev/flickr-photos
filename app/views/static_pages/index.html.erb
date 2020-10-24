@@ -1,6 +1,6 @@
 <h1>Photos</h1>
 
-<%= form_with url: photos_path, method: "GET", local: true do |f| %>
+<%= form_with url: root_path, method: "GET", local: true do |f| %>
   <%= f.text_field :id, placeholder: "flickr user id" %>
   <%= f.submit "Get Photos" %>
 <% end %>
