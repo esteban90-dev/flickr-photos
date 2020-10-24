@@ -2,10 +2,15 @@ class StaticPagesController < ApplicationController
   def index
     if params[:id]
       #get photos for specific user
-      @urls = get_public_photos(params[:id])
+      begin
+        @urls = get_public_photos(params[:id])
+      rescue
+        flash[:notice] = "User not found"
+        redirect_to root_path
+      end
     else
       #get random public photos and their respective user_ids
-      @urls_and_users = get_random_photos_with_user(5)
+      @urls_and_users = get_random_photos_with_user(4)
     end
   end
 
