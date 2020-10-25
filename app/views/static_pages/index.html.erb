@@ -1,15 +1,19 @@
-<h1>Photos</h1>
+<div class="row justify-content-center mt-5 mb-3">
+  <h1>Flickr Photos</h1>
+</div>
 
-<%= form_with url: root_path, method: "GET", local: true do |f| %>
-  <%= f.text_field :id, placeholder: "flickr user id" %>
-  <%= f.submit "Get Photos" %>
-<% end %>
+<div class="row justify-content-center">
+  <%= form_with url: root_path, method: "GET", local: true, class: "form-group" do |f| %>
+    <%= f.text_field :id, placeholder: "flickr user id", class: "form-control mb-3" %>
+    <%= f.submit "Get Photos", class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>
 
 <br><br>
 
 <% if @urls %>
-  <div>  
-    Displaying Photos from <%= link_to @user.username, @user.photosurl %>
+  <div class="row justify-content-center">  
+    <p>Displaying Photos from <%= link_to @user.username, @user.photosurl %></p>
   </div>
   <% @urls.each do |url| %>
     <%= image_tag(url) %>
