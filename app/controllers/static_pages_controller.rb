@@ -10,8 +10,8 @@ class StaticPagesController < ApplicationController
         redirect_to root_path
       end
     else
-      #get random public photos and their respective user_ids
-      @urls_and_users = get_random_photos_with_user(4)
+      #get recent public photos and their respective user_ids
+      @urls_and_users = get_public_photos_with_user(4)
     end
   end
 
@@ -33,11 +33,11 @@ class StaticPagesController < ApplicationController
     flickr.people.getInfo( :user_id => id ) 
   end
 
-  def get_random_photos_with_user(count)
+  def get_public_photos_with_user(count)
     flickr = get_flickr
     photos = flickr.photos.getRecent(:per_page => count)
     user_ids = photos.map{ |photo| photo.owner }
-    photos = photos.map{ |photo| Flickr.url_n(photo) }
+    photos = photos.map{ |photo| Flickr.url_m(photo) }
     photos.zip(user_ids).to_h
   end
 end
